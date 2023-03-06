@@ -70,6 +70,7 @@
 3. How to use nodePort service.
 . How to use loadBalancer service.
 5. How to work with configMap.
+6. How to use a replicaSet.
 
 - How to work with a pod.
    - Can you use `envFrom` for get all env to configMap.
@@ -149,6 +150,29 @@ metadata:
    name: <cm-name>
 data:
    USER_GROUP: <user-group>
+```
+
+- How to use a replicaSet.
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: <rs-name>
+spec:
+  template:
+    metadata:
+      name: <pod-name>
+      labels:
+        app: <app-name>
+    spec:
+      containers:
+        - name: <container-name>
+          image: <image-id>
+  replicas: <number-of-replicas>
+  selector:
+    matchLabels:
+      app: <app-name>
 ```
 
 ### Notes
