@@ -29,7 +29,8 @@
 
 ### To do
 
-- [ ]  
+- [ ] Create a descriptive and declarative pod.
+- [ ] Create a clusterIp.
 
 ### AWS ECS Study
 
@@ -51,17 +52,85 @@
 - Docker
 - Linux
 
+- Tools
+   - `kubectl`
+   - `minikube`
+   - `virtualbox`
+
 ### What its?
 
-1. What is the difference between `x` and `y` ?
+1. What is the difference between `master` and `nodes` ?
+2. What is the difference between `clusterIP`, `nodePort` and `loadBalancer` ?
+3. What is the difference between `x` and `y` ?
     
 ### How to do
 
-1. abc
+1. How to work with a pod.
+2. How to use clusterIP service.
+3. How to use nodePort service.
+
+- How to work with a pod.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+   name: <pod-name>
+   labels:
+      app: <app-name>
+spec:
+  containers:
+    - name: <container-name>
+      image: <image-id>
+      ports:
+         - containerPorts: <port>
+```
+
+- How to use clusterIP service.
+   - Pod comunication.
+   - Safe pod ip.
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+   name: <svc-name>
+spec:
+   type: ClusterIP
+   selector:
+      app: <app-name>
+   ports:
+      - port: <port>
+        targetPort: <pod-port>
+```
+
+- How to use nodePort service.
+   - On linux access app via `internal id` not bind for localhost.
+      - run `kubectl get notes -o wide` for get ip.
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+   name: <svc-name>
+spec:
+   type: NodePort
+   selector:
+      app: <app-name>
+   ports:
+      - port: <port>
+        targetPort: <pod-port>
+        nodePort: <30000 - 32767>
+```
 
 ### Notes
 
-Content here...
+Start with
+`minikube start --vm-driver=virtualbox`
+
+Run commands
+`kubectl apply -f <folder/file.yaml>`
+
 
 ## How to contribute
 - Make a fork;
