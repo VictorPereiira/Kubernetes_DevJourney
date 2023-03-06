@@ -68,8 +68,11 @@
 1. How to work with a pod.
 2. How to use clusterIP service.
 3. How to use nodePort service.
+. How to use loadBalancer service.
+5. How to work with configMap.
 
 - How to work with a pod.
+   - Can you use `envFrom` for get all env to configMap.
 
 ```yaml
 apiVersion: v1
@@ -84,6 +87,14 @@ spec:
       image: <image-id>
       ports:
          - containerPorts: <port>
+      env:
+         - name: "USER_NAME"
+           value: "<user-name>"
+         - name: "USER_GROUP"
+           valueFrom:
+            configMapKeyRef: 
+               name: <cm-name>
+               key: USER_GROU
 ```
 
 - How to use clusterIP service.
@@ -121,6 +132,23 @@ spec:
       - port: <port>
         targetPort: <pod-port>
         nodePort: <30000 - 32767>
+```
+
+- How to use loadBalancer service.
+
+```yaml
+code here...
+```
+
+- How to work with configMap.
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+   name: <cm-name>
+data:
+   USER_GROUP: <user-group>
 ```
 
 ### Notes
