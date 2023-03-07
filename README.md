@@ -43,7 +43,7 @@
 - Read
    - abc
 - Youtube Videos
-   - abc
+   - [Docker e Kubernetes](https://www.youtube.com/watch?v=wxLvvMxzc1Q)
 - Courses
    - [Alura Kubernetes I](https://www.alura.com.br/curso-online-kubernetes-pods-services-configmap)
    - [Alura Kubernets II](https://cursos.alura.com.br/course/kubernetes-deployments-volumes-escalabilidade)
@@ -68,9 +68,16 @@
 1. How to work with a pod.
 2. How to use clusterIP service.
 3. How to use nodePort service.
-. How to use loadBalancer service.
+4. How to use loadBalancer service.
 5. How to work with configMap.
 6. How to use a replicaSet.
+7. How to use a deployment.
+8. How to use a volume.
+9. How to use a startefulSet volume.
+10. How to work with a liveness probes.
+11. How to work with a readiness probes.
+12. How to work with a horizontal pod autoscaler.
+
 
 - How to work with a pod.
    - Can you use `envFrom` for get all env to configMap.
@@ -173,6 +180,86 @@ spec:
   selector:
     matchLabels:
       app: <app-name>
+```
+
+- How to use a deployment.
+
+```yaml
+   code here...
+```
+
+- How to use a hostPath volume.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+   name: <pod-name>
+   labels:
+      app: <app-name>
+spec:
+  containers:
+    - name: <container-name>
+      image: <image-id>
+      ports:
+         - containerPorts: <port>
+      volumeMounts:
+         - mountPath: /<container-volume-name>
+           name: <volume-name>
+   volumes:
+      - name: <volume-name>
+        hostPath:
+         path: /home/<volume-name>
+         type: DirectoryOrCreate
+```
+
+- How to use a startefulSet volume.
+
+```yaml
+   code here...
+```
+
+- How to work with a liveness probes
+- How to work with a readiness probes
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+   name: <pod-name>
+   labels:
+      app: <app-name>
+spec:
+  containers:
+    - name: <container-name>
+      image: <image-id>
+      ports:
+         - containerPorts: <port>
+      volumeMounts:
+         - mountPath: /<container-volume-name>
+           name: <volume-name>
+   volumes:
+      - name: <volume-name>
+        hostPath:
+         path: /home/<volume-name>
+         type: DirectoryOrCreate
+        livenessProbe:
+         httpGet:
+            path: <path>
+            port: <port>
+         periodSeconds: <seconds>
+         failureThreshold: <number-of-falls>
+         initialDelaySeconds: <seconds>
+        resources:
+         requests:
+            cpu: 10m
+
+```
+
+- How to work with a horizontal pod autoscaler.
+
+```yaml
+   code here...
 ```
 
 ### Notes
